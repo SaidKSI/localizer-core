@@ -34,4 +34,4 @@ pnpm-debug.log*
 .turbo/
 
 # Cache
-.localize/
+.localizer/

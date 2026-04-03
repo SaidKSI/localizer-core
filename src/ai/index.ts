@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { resolve, basename, extname, join } from "path";
-import type { ScanResult, AIResponse, LocalizeConfig, AIRequest } from "../types.js";
+import type { ScanResult, AIResponse, LocalizerConfig, AIRequest } from "../types.js";
 import { deduplicateResults, buildAIRequests, applyResolvedKeys } from "./dedup.js";
 import { callAnthropic, estimateCost } from "./anthropic.js";
 import { callOpenAI } from "./openai.js";
@@ -209,7 +209,7 @@ async function mergeIntoMessagesFile(
 async function writeTranslations(
   results: ScanResult[],
   responses: Map<string, AIResponse>,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   options: { dryRun: boolean; overwrite: boolean },
 ): Promise<string[]> {
   // Group resolved results by source file
@@ -302,7 +302,7 @@ export interface TranslateResult {
  */
 export async function translateStrings(
   scanResults: ScanResult[],
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   apiKey: string,
   options: TranslateOptions = {},
 ): Promise<TranslateResult> {
@@ -396,14 +396,14 @@ export interface TranslateExistingResult {
 
 /**
  * Translate a list of existing (key, value, pageName) entries into target languages.
- * Used by `localize translate --from-existing` and `localize add-lang`.
+ * Used by `localizer translate --from-existing` and `localizer add-lang`.
  *
  * Skips entries that already have translations in target languages
  * unless `overwrite` is true.
  */
 export async function translateExistingKeys(
   entries: ExistingKeyEntry[],
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   apiKey: string,
   options: { dryRun?: boolean; overwrite?: boolean; langs?: string[] } = {},
 ): Promise<TranslateExistingResult> {
@@ -512,7 +512,7 @@ export async function translateExistingKeys(
           }
         } catch (err) {
           console.error(
-            `[localize] Translation failed for "${value}": ${String(err)}`,
+            `[localizer] Translation failed for "${value}": ${String(err)}`,
           );
         }
       }),
@@ -575,11 +575,11 @@ export async function translateExistingKeys(
 
 /**
  * Send a minimal test request to verify an API key is valid.
- * Used by `localize init` before saving the key to ~/.localize.
+ * Used by `localizer init` before saving the key to ~/.localizer.
  * Returns true if the key works, false otherwise.
  */
 export async function validateApiKey(
-  provider: LocalizeConfig["aiProvider"],
+  provider: LocalizerConfig["aiProvider"],
   model: string,
   apiKey: string,
 ): Promise<boolean> {

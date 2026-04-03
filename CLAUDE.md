@@ -6,7 +6,7 @@ Core library for the Localizer i18n CLI tool. This is a **public npm package** (
 
 ## Project Overview
 
-**@localize/core** is a standalone, reusable library that:
+**@saidksi/localizer-core** is a standalone, reusable library that:
 - Detects hardcoded strings in TypeScript/JavaScript code (AST-based)
 - Generates semantic i18n key names via AI (Anthropic or OpenAI)
 - Transforms source code to replace strings with i18n function calls
@@ -16,7 +16,7 @@ Core library for the Localizer i18n CLI tool. This is a **public npm package** (
 **Status:** V0.1.0 — Core logic complete. Ready to publish to npm.
 
 **Package:** `@saidksi/localizer-core@0.1.0` (npm)
-**Repository:** https://github.com/SaidKSI/localize-core
+**Repository:** https://github.com/SaidKSI/localizer-core
 **GitHub Actions:** ✅ CI + Auto-publish on tags (v*)
 
 ---
@@ -205,13 +205,13 @@ const report = await validator.validate();
 
 Smart caching to avoid re-processing unchanged files.
 
-**Storage:** `.localize/cache.json` (in user's project root)
+**Storage:** `.localizer/cache.json` (in user's project root)
 **Key:** File path → SHA-256 hash + last scan metadata
 
 **Features:**
 - Skips unchanged files unless `--force` flag
 - Persists across runs
-- User can manually clear `.localize/`
+- User can manually clear `.localizer/`
 
 ---
 
@@ -340,7 +340,7 @@ npm publish
 - **Code Generation:** ts-morph primary, jscodeshift fallback
 - **Concurrency:** `p-limit` with max 5 concurrent AI calls
 - **File Organization:** Per-page structure (messages/en/login.json)
-- **API Keys:** Global `~/.localize` (not per-project .env)
+- **API Keys:** Global `~/.localizer` (not per-project .env)
 - **Merge Strategy:** New keys merged into existing JSON (never overwrite unless explicit flag)
 
 ---
@@ -348,26 +348,26 @@ npm publish
 ## Related Repos
 
 - **localizer-cli** — CLI app that uses this core library
-  - Repo: https://github.com/SaidKSI/localize-cli
+  - Repo: https://github.com/SaidKSI/localizer-cli
   - Depends on: `@saidksi/localizer-core@^0.1.0` (npm)
   - Status: Ready to publish after core is available
 
-- **localize-sample-app** — Testing app for CLI
-  - Repo: https://github.com/SaidKSI/localize-sample-app
+- **localizer-sample-app** — Testing app for CLI
+  - Repo: https://github.com/SaidKSI/localizer-sample-app
   - Framework: React 18 + Vite + TypeScript
   - 40+ hardcoded strings for CLI testing
   - Languages: en, fr, es (empty JSONs ready for translation)
 
-- **localize-dashboard** (Phase 2, private)
-  - Will depend on `localize-core`
+- **localizer-dashboard** (Phase 2, private)
+  - Will depend on `@saidksi/localizer-core`
   - Handles auth, billing, UI
 
 ---
 
 ## Key Contacts & Resources
 
-- **GitHub Issues:** https://github.com/SaidKSI/localize-core/issues
+- **GitHub Issues:** https://github.com/SaidKSI/localizer-core/issues
 - **npm Package:** https://www.npmjs.com/package/@saidksi/localizer-core
-- **GitHub Actions:** https://github.com/SaidKSI/localize-core/actions
+- **GitHub Actions:** https://github.com/SaidKSI/localizer-core/actions
 - **Author:** SaidKSI
 - **License:** MIT

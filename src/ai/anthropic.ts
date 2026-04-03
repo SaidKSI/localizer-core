@@ -60,7 +60,7 @@ export async function callAnthropic(
         } catch (err) {
           // Log and skip — don't fail the entire batch
           console.error(
-            `[localize] Anthropic call failed for "${request.value}": ${String(err)}`,
+            `[localizer] Anthropic call failed for "${request.value}": ${String(err)}`,
           );
           return;
         }
@@ -73,7 +73,7 @@ export async function callAnthropic(
           parsed = parseAIResponse(rawText);
         } catch (err) {
           console.error(
-            `[localize] Failed to parse response for "${request.value}": ${String(err)}`,
+            `[localizer] Failed to parse response for "${request.value}": ${String(err)}`,
           );
           return;
         }

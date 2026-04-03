@@ -1,6 +1,6 @@
-# @localize/core
+# @saidksi/localizer-core
 
-Core library for the Localize i18n CLI tool. Provides AST-based string detection, AI-powered i18n key generation, code transformation, and validation.
+Core library for the Localizer i18n CLI tool. Provides AST-based string detection, AI-powered i18n key generation, code transformation, and validation.
 
 ## Features
 
@@ -13,15 +13,15 @@ Core library for the Localize i18n CLI tool. Provides AST-based string detection
 ## Installation
 
 ```bash
-npm install @localize/core
+npm install @saidksi/localizer-core
 # or
-pnpm add @localize/core
+pnpm add @saidksi/localizer-core
 ```
 
 ## Quick Start
 
 ```typescript
-import { Scanner, AIClient, Rewriter, Validator } from "@localize/core";
+import { Scanner, AIClient, Rewriter, Validator } from "@saidksi/localizer-core";
 
 // 1. Scan for hardcoded strings
 const scanner = new Scanner({ defaultLanguage: "en" });
@@ -114,7 +114,7 @@ const report = await validator.validate();
 
 ## Configuration
 
-Create a `.localize.config.json` in your project root:
+Create a `.localizer.config.json` in your project root:
 
 ```json
 {
@@ -161,4 +161,4 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ## Repository
 
-https://github.com/SaidKSI/localize-core
+https://github.com/SaidKSI/localizer-core

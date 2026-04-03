@@ -1,6 +1,6 @@
 import { readFile, readdir } from "fs/promises";
 import { resolve, join, basename, extname } from "path";
-import type { ValidationResult, LocalizeConfig, ScanResult } from "../types.js";
+import type { ValidationResult, LocalizerConfig, ScanResult } from "../types.js";
 
 // ─── Key flattening ───────────────────────────────────────────────────────────
 
@@ -159,7 +159,7 @@ export interface ValidateOptions {
  * Always includes the default language in the result (always 100%).
  */
 export async function validateCoverage(
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   options: ValidateOptions = {},
 ): Promise<ValidationResult[]> {
   const { messagesDir, defaultLanguage, languages } = config;
@@ -218,10 +218,10 @@ export async function validateCoverage(
 
 /**
  * Returns true if all target languages have 100% key coverage.
- * Convenience wrapper used by `localize run` to decide the final status line.
+ * Convenience wrapper used by `localizer run` to decide the final status line.
  */
 export async function isFullyCovered(
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<boolean> {
   const results = await validateCoverage(config);
   return results.every((r) => r.coveragePercent === 100);
@@ -262,7 +262,7 @@ function buildValueToKeyMap(
  * Populate `resolvedKey` on each ScanResult by looking up the string value
  * in the default language messages JSON for that page.
  *
- * Called by `localize rewrite` when run standalone (after `localize translate`
+ * Called by `localizer rewrite` when run standalone (after `localizer translate`
  * has already written the messages JSON).
  *
  * Results whose value cannot be found in the JSON are returned unchanged
@@ -270,7 +270,7 @@ function buildValueToKeyMap(
  */
 export async function resolveKeysFromMessages(
   results: ScanResult[],
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<ScanResult[]> {
   // Build a cache of page → value→key map to avoid re-reading files
   const pageCache = new Map<string, Map<string, string>>();
@@ -310,10 +310,10 @@ export async function resolveKeysFromMessages(
 
 /**
  * Compute a diff of missing keys for a single language relative to the default.
- * Used by `localize diff --lang ar`.
+ * Used by `localizer diff --lang ar`.
  */
 export async function getMissingKeys(
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   lang: string,
   page?: string,
 ): Promise<string[]> {

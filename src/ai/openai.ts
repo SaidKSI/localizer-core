@@ -61,7 +61,7 @@ export async function callOpenAI(
           });
         } catch (err) {
           console.error(
-            `[localize] OpenAI call failed for "${request.value}": ${String(err)}`,
+            `[localizer] OpenAI call failed for "${request.value}": ${String(err)}`,
           );
           return;
         }
@@ -73,7 +73,7 @@ export async function callOpenAI(
           parsed = parseAIResponse(rawText);
         } catch (err) {
           console.error(
-            `[localize] Failed to parse response for "${request.value}": ${String(err)}`,
+            `[localizer] Failed to parse response for "${request.value}": ${String(err)}`,
           );
           return;
         }

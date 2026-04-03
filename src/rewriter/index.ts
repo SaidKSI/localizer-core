@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 import { resolve, basename, extname } from "path";
-import type { ScanResult, RewriteResult, LocalizeConfig } from "../types.js";
+import type { ScanResult, RewriteResult, LocalizerConfig } from "../types.js";
 import { applyStringReplacements, getAdapter } from "./transforms.js";
 import { ensureTranslationBoilerplate } from "./ts-morph.js";
 
@@ -73,7 +73,7 @@ export function generateDiff(
 export async function rewriteFile(
   filePath: string,
   results: ScanResult[],
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<RewriteResult> {
   const absolute = resolve(filePath);
   const originalSource = await readFile(absolute, "utf-8");
@@ -136,7 +136,7 @@ export async function applyRewrite(result: RewriteResult): Promise<RewriteResult
  */
 export async function rewriteFiles(
   fileResultsMap: Map<string, ScanResult[]>,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<RewriteResult[]> {
   const rewrites: RewriteResult[] = [];
   for (const [filePath, results] of fileResultsMap) {

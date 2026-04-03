@@ -1,5 +1,5 @@
 import { basename, extname } from "path";
-import type { ScanResult, AIRequest, LocalizeConfig } from "../types.js";
+import type { ScanResult, AIRequest, LocalizerConfig } from "../types.js";
 
 // ─── Component context ────────────────────────────────────────────────────────
 
@@ -71,7 +71,7 @@ function getContextKey(filePath: string, objectKey?: string): string {
  */
 export function buildAIRequests(
   groups: Map<string, ScanResult[]>,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   allResults?: ScanResult[],
 ): AIRequest[] {
   const requests: AIRequest[] = [];

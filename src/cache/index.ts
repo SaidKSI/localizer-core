@@ -5,7 +5,7 @@ import type { CacheStore, CacheEntry } from "../types.js";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const CACHE_DIR = ".localize";
+const CACHE_DIR = ".localizer";
 const CACHE_FILE = "cache.json";
 const CURRENT_VERSION = 1 as const;
 
@@ -32,7 +32,7 @@ export function hashSource(source: string): string {
 // ─── Read / Write ─────────────────────────────────────────────────────────────
 
 /**
- * Read the cache store from `{projectRoot}/.localize/cache.json`.
+ * Read the cache store from `{projectRoot}/.localizer/cache.json`.
  * Returns an empty store if the file doesn't exist or is unreadable.
  */
 export async function readCache(projectRoot: string): Promise<CacheStore> {
@@ -49,8 +49,8 @@ export async function readCache(projectRoot: string): Promise<CacheStore> {
 }
 
 /**
- * Persist the cache store to `{projectRoot}/.localize/cache.json`.
- * Creates the `.localize/` directory if it doesn't exist.
+ * Persist the cache store to `{projectRoot}/.localizer/cache.json`.
+ * Creates the `.localizer/` directory if it doesn't exist.
  */
 export async function writeCache(
   projectRoot: string,
@@ -63,7 +63,7 @@ export async function writeCache(
 
 /**
  * Delete the cache file entirely.
- * Used by `localize run --force` to trigger a full re-process.
+ * Used by `localizer run --force` to trigger a full re-process.
  */
 export async function clearCache(projectRoot: string): Promise<void> {
   const cachePath = getCachePath(projectRoot);

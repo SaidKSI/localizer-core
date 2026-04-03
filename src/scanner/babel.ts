@@ -2,7 +2,7 @@ import { parse } from "@babel/parser";
 import _traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import type { NodePath } from "@babel/traverse";
-import type { ScanResult, NodeType, LocalizeConfig, InterpolationVar } from "../types.js";
+import type { ScanResult, NodeType, LocalizerConfig, InterpolationVar } from "../types.js";
 import { shouldFilter, NON_TRANSLATABLE_ATTRS, TRANSLATION_FNS, STATE_INITIALIZATION_FNS } from "./filters.js";
 
 // @babel/traverse ships CJS; handle both interop shapes
@@ -288,7 +288,7 @@ function makeResult(
 export function scanWithBabel(
   filePath: string,
   source: string,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): ScanResult[] {
   const results: ScanResult[] = [];
   const lines = source.split("\n");

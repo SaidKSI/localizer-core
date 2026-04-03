@@ -10,11 +10,11 @@ export type I18nLibrary =
   | "i18next";
 
 /**
- * Shape of .localize.config.json in the user's project root.
- * Loaded via cosmiconfig from `.localize.config.json` or the
- * `localize` key in package.json.
+ * Shape of .localizer.config.json in the user's project root.
+ * Loaded via cosmiconfig from `.localizer.config.json` or the
+ * `localizer` key in package.json.
  */
-export interface LocalizeConfig {
+export interface LocalizerConfig {
   /** ISO 639-1 code. Source of truth for key extraction. */
   defaultLanguage: string;
   /** Target translation languages, e.g. ["fr", "ar", "es"]. */
@@ -182,7 +182,7 @@ export interface ValidationResult {
 
 // ─── Cache ───────────────────────────────────────────────────────────────────
 
-/** Single file record stored in .localize/cache.json. */
+/** Single file record stored in .localizer/cache.json. */
 export interface CacheEntry {
   /** SHA-256 hex digest of the file contents at processing time. */
   hash: string;
@@ -190,7 +190,7 @@ export interface CacheEntry {
   stringCount: number;
 }
 
-/** Full shape of .localize/cache.json. */
+/** Full shape of .localizer/cache.json. */
 export interface CacheStore {
   version: 1;
   /** Keyed by file path relative to the user's project root. */
@@ -218,7 +218,7 @@ export interface RunOptions {
   output?: string;
 }
 
-/** Summary returned after a full `localize run` pipeline. */
+/** Summary returned after a full `localizer run` pipeline. */
 export interface PipelineResult {
   file?: string;
   dir?: string;

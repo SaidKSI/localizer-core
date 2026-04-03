@@ -1,4 +1,4 @@
-import type { LocalizeConfig } from "../types.js";
+import type { LocalizerConfig } from "../types.js";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -139,7 +139,7 @@ export function matchesIgnorePattern(
  */
 export function shouldFilter(
   value: string,
-  config: Pick<LocalizeConfig, "ignorePatterns">,
+  config: Pick<LocalizerConfig, "ignorePatterns">,
   isJSX: boolean = false,
 ): boolean {
   const trimmed = value.trim();

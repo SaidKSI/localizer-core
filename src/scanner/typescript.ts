@@ -1,5 +1,5 @@
 import ts from "typescript";
-import type { ScanResult, NodeType, LocalizeConfig, InterpolationVar } from "../types.js";
+import type { ScanResult, NodeType, LocalizerConfig, InterpolationVar } from "../types.js";
 import { shouldFilter, NON_TRANSLATABLE_ATTRS, TRANSLATION_FNS, STATE_INITIALIZATION_FNS } from "./filters.js";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ function tryHandleInterpolatedJSX(
   filePath: string,
   lines: string[],
   sourceFile: ts.SourceFile,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
   results: ScanResult[],
   isInsideTranslationCallFn: (node: ts.Node) => boolean,
 ): boolean {
@@ -419,7 +419,7 @@ function tryHandleInterpolatedJSX(
 export function scanWithTypeScript(
   filePath: string,
   source: string,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): ScanResult[] {
   const results: ScanResult[] = [];
   const lines = source.split("\n");

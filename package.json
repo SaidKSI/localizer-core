@@ -32,12 +32,12 @@
   "packageManager": "pnpm@10.33.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SaidKSI/localize-core.git"
+    "url": "https://github.com/SaidKSI/localizer-core.git"
   },
   "bugs": {
-    "url": "https://github.com/SaidKSI/localize-core/issues"
+    "url": "https://github.com/SaidKSI/localizer-core/issues"
   },
-  "homepage": "https://github.com/SaidKSI/localize-core#readme",
+  "homepage": "https://github.com/SaidKSI/localizer-core#readme",
   "publishConfig": {
     "access": "public"
   },

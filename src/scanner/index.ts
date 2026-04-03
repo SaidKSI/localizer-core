@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import { resolve, extname } from "path";
 import fg from "fast-glob";
-import type { ScanResult, ScanReport, LocalizeConfig } from "../types.js";
+import type { ScanResult, ScanReport, LocalizerConfig } from "../types.js";
 import { scanWithBabel } from "./babel.js";
 import { scanWithTypeScript } from "./typescript.js";
 
@@ -18,7 +18,7 @@ function isSupportedFile(filePath: string): boolean {
 function routeFile(
   filePath: string,
   source: string,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): ScanResult[] {
   const ext = extname(filePath).toLowerCase();
   if (BABEL_EXTS.has(ext)) return scanWithBabel(filePath, source, config);
@@ -34,7 +34,7 @@ function routeFile(
  */
 export async function scanFile(
   filePath: string,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<ScanResult[]> {
   const absolute = resolve(filePath);
   if (!isSupportedFile(absolute)) return [];
@@ -48,7 +48,7 @@ export async function scanFile(
  */
 export async function scanFiles(
   filePaths: string[],
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<ScanResult[]> {
   const results = await Promise.all(
     filePaths.map((f) => scanFile(f, config)),
@@ -61,7 +61,7 @@ export async function scanFiles(
  */
 export async function scanDirectory(
   dir: string,
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<ScanResult[]> {
   const patterns = [
     `${dir}/**/*.{js,jsx,ts,tsx}`,
@@ -89,7 +89,7 @@ export async function scanDirectory(
  */
 export async function buildScanReport(
   options: { file?: string; dir?: string },
-  config: LocalizeConfig,
+  config: LocalizerConfig,
 ): Promise<ScanReport> {
   let results: ScanResult[] = [];
 
