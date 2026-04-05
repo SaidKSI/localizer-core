@@ -16,7 +16,7 @@ describe("scanner", () => {
     it("scans login fixture and finds translatable strings", async () => {
       const results = await scanFile(loginFixture, config);
 
-      expect(results.length).toBeGreaterThanOrEqual(5);
+      expect(results.length).toBeGreaterThanOrEqual(4);
       const values = results.map((r) => r.value);
       expect(values).toContain("Welcome back");
       expect(values).toContain("Sign in to continue");
@@ -29,6 +29,15 @@ describe("scanner", () => {
       const results = await scanFile(loginFixture, config);
       const values = results.map((r) => r.value);
       expect(values).not.toContain("/forgot-password");
+    });
+
+    it("does not include React Router Link 'to' attribute paths", async () => {
+      // This test ensures that React Router's <Link to="/path" />
+      // paths are not scanned as translatable text
+      const results = await scanFile(loginFixture, config);
+      const values = results.map((r) => r.value);
+      // If there were any `to` attributes with paths, they should be filtered
+      expect(values.every((v) => !v.startsWith("/"))).toBe(true);
     });
 
     it("includes file, line, column metadata", async () => {
@@ -115,7 +124,7 @@ describe("scanner", () => {
 
     it("report includes scan results", async () => {
       const report = await buildScanReport({ file: loginFixture }, config);
-      expect(report.results.length).toBeGreaterThanOrEqual(5);
+      expect(report.results.length).toBeGreaterThanOrEqual(4);
     });
 
     it("generatedAt is a timestamp", async () => {

@@ -16,45 +16,76 @@ const CSS_TOKEN_RE = /^-?!?[a-z][a-z0-9]*([:-][a-z0-9]+)*(\[.+\])?(%)?$/;
 /**
  * JSX attribute names whose string values are never user-facing text.
  * Strings in these attributes are silently skipped by the scanner.
+ *
+ * Includes:
+ * - Navigation: href, to (React Router), action (forms)
+ * - CSS/styling: className, class, style
+ * - HTML structure: id, name, key, ref, role
+ * - Images/media: src, srcSet, width, height, alt (alt is covered by user-facing rules)
+ * - SVG: fill, stroke, viewBox, d (path)
+ * - Testing: data-testid, data-cy, data-test
+ * - Form attributes: method, type, accept, pattern, autoComplete, encType
+ * - Accessibility: tabIndex, htmlFor, aria-* (covered separately)
  */
 export const NON_TRANSLATABLE_ATTRS = new Set([
+  // Navigation & links
+  "href",
+  "to",              // React Router Link
+  "action",          // Form action URL
+  "target",          // Link target (e.g., "_blank")
+
+  // CSS & styling
   "className",
   "class",
   "style",
-  "href",
-  "src",
-  "srcSet",
-  "srcset",
-  "action",
-  "method",
-  "type",
+
+  // HTML structure & identity
   "id",
   "name",
   "key",
   "ref",
-  "tabIndex",
-  "tabindex",
-  "htmlFor",
-  "for",
-  "target",
-  "rel",
-  "download",
+  "role",
+
+  // Images & media
+  "src",
+  "srcSet",
+  "srcset",
+  "width",
+  "height",
+
+  // SVG
+  "fill",
+  "stroke",
+  "viewBox",
+  "d",               // SVG path definition
+
+  // Form attributes
+  "method",
+  "type",
   "accept",
   "pattern",
   "autoComplete",
   "autocomplete",
   "encType",
   "enctype",
-  "role",
-  "value",
+  "value",           // Form field default value
+  "defaultValue",    // React controlled component default
+
+  // Accessibility & testing
+  "tabIndex",
+  "tabindex",
+  "htmlFor",
+  "for",
+  "rel",
+  "download",
+  "xmlns",
   "data-testid",
   "data-cy",
   "data-test",
-  "xmlns",
-  "fill",
-  "stroke",
-  "viewBox",
-  "d", // SVG path
+
+  // NOTE: placeholder is NOT here — it IS translatable (user-facing)
+  // NOTE: alt is NOT here — it IS translatable (image descriptions)
+  // NOTE: title is NOT here — it IS translatable (tooltips)
 ]);
 
 /** Translation function names — strings inside these calls are already translated. */

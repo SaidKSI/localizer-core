@@ -1,6 +1,6 @@
 {
   "name": "@saidksi/localizer-core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Core i18n automation library for localizer",
   "type": "module",
   "exports": {
